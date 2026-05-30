@@ -17,8 +17,30 @@ function App() {
     return w ? JSON.parse(w) : [];
   });
 
+  const formatChannelUrl = (input: string): string => {
+    const trimmed = input.trim();
+    if (!trimmed) return '';
+
+    // If it's already a full URL or contains youtube.com
+    if (trimmed.includes('youtube.com') || trimmed.includes('youtu.be')) {
+      if (!trimmed.startsWith('http://') && !trimmed.startsWith('https://')) {
+        return `https://${trimmed}`;
+      }
+      return trimmed;
+    }
+
+    // If it starts with @ (e.g., @LifeLiftLogic)
+    if (trimmed.startsWith('@')) {
+      return `https://youtube.com/${trimmed}`;
+    }
+
+    // If it's just a raw handle (e.g., LifeLiftLogic)
+    return `https://youtube.com/@${trimmed}`;
+  };
+
   const fetchChannel = async (targetUrl: string) => {
-    if (!targetUrl.trim()) return;
+    const formattedUrl = formatChannelUrl(targetUrl);
+    if (!formattedUrl) return;
 
     setLoading(true);
     setError('');
@@ -27,7 +49,7 @@ function App() {
 
     try {
       const backendUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
-      const response = await fetch(`${backendUrl}/api/channel?url=${encodeURIComponent(targetUrl)}`);
+      const response = await fetch(`${backendUrl}/api/channel?url=${encodeURIComponent(formattedUrl)}`);
       if (!response.ok) {
         const errData = await response.json();
         throw new Error(errData.error || 'Failed to fetch channel');
