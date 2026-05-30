@@ -1,0 +1,48 @@
+@import 'tailwindcss';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;&display=swap');
+
+@theme {
+  --color-primary: #000000;
+  --color-primary-hover: #1f1f1f;
+  --color-background: #FAF9F6; /* Warm paper white */
+  --color-surface: #ffffff;
+  --font-sans: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+  color: #1a1a1a;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar for light mode */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: #e5e5e5;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4d4d4;
+}
+
+.low-dopamine-panel {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+}
+
+/* Grayscale thumbnails to prevent dopamine spikes */
+.grayscale-thumbnail {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+.grayscale-thumbnail:hover {
+  filter: grayscale(0%);
+}
