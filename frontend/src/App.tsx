@@ -4,6 +4,7 @@ import { VideoCard } from './components/VideoCard';
 import { PostCard } from './components/PostCard';
 import { SavedChannels } from './components/SavedChannels';
 import { VideoPlayerModal } from './components/VideoPlayerModal';
+import logo from './assets/apple-touch-icon.png';
 
 function App() {
   const [urlInput, setUrlInput] = useState('');
@@ -134,7 +135,7 @@ function App() {
   return (
     <div className="min-h-screen bg-[#FAF9F6] text-neutral-800 pb-20 selection:bg-neutral-200 selection:text-black">
       <header className="pt-16 pb-8 px-4 flex flex-col items-center border-b border-neutral-100">
-        <h1
+        <div 
           onClick={() => {
             setData(null);
             setUrlInput('');
@@ -142,10 +143,19 @@ function App() {
             setActiveTab('home');
             setActiveVideoId(null);
           }}
-          className="text-2xl font-semibold tracking-widest text-neutral-900 uppercase mb-2 cursor-pointer hover:opacity-75 transition-opacity select-none"
+          className="flex items-center gap-3 cursor-pointer group mb-2 select-none"
         >
-          CureFeed
-        </h1>
+          <div className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-neutral-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)] group-hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] group-hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+            <img 
+              src={logo} 
+              alt="CureFeed Logo" 
+              className="w-8 h-8 object-contain transition-transform duration-500 group-hover:scale-110" 
+            />
+          </div>
+          <h1 className="text-2xl font-semibold tracking-widest text-neutral-900 uppercase group-hover:text-black transition-colors duration-300">
+            CureFeed
+          </h1>
+        </div>
         <p className="text-neutral-500 text-xs font-mono mb-8 text-center tracking-tight max-w-sm">
           distraction-free feed
         </p>
